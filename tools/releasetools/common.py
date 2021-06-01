@@ -3532,13 +3532,8 @@ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
       bonus_args = ""
       assert not os.path.exists(path)
     else:
-      diff_program = ["imgdiff"]
-      if os.path.exists(path):
-        diff_program.append("-b")
-        diff_program.append(path)
-        bonus_args = "--bonus /vendor/etc/recovery-resource.dat"
-      else:
-        bonus_args = ""
+      diff_program = ["bsdiff"]
+      bonus_args = ""
 
     d = Difference(recovery_img, boot_img, diff_program=diff_program)
     _, _, patch = d.ComputePatch()
