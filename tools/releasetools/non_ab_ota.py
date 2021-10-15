@@ -211,6 +211,45 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: {}".format(target_info.fingerprint))
 
+  script.Print("--------------------------------------------------");
+  script.Print("              Get Ready To Be Xtended             ");
+  script.Print("--------------------------------------------------");
+  script.Print("                                                  ");
+  script.Print("____  ___ __                     .___         .___");
+  script.Print("\   \/  //  |_  ____   ____    __| _/____   __| _/");
+  script.Print(" \     /\   __\/ __ \ /    \  / __ |/ __ \ / __ | ");
+  script.Print(" /     \ |  | \  ___/|   |  \/ /_/ \  ___// /_/ | ");
+  script.Print("/___/\  \|__|  \___  >___|  /\____ |\___  >____ | ");
+  script.Print("      \_/          \/     \/      \/    \/     \/ ");
+  script.Print("                                                  ");
+  script.Print("--------------------------------------------------");
+  script.Print("               Custom ROM Redefined               ");
+  script.Print("--------------------------------------------------");
+
+  xtndversion = target_info.GetBuildProp("ro.xtended.build.version")
+  androidver = target_info.GetBuildProp("ro.build.version.release")
+  buildtype = target_info.GetBuildProp("ro.build.type")
+  buildid = target_info.GetBuildProp("ro.build.id")
+  buildday = target_info.GetBuildProp("ro.build.date")
+  securep = target_info.GetBuildProp("ro.build.version.security_patch")
+  device = target_info.GetBuildProp("ro.product.device")
+  manufacturer = target_info.GetBuildProp("ro.product.manufacturer")
+
+  script.Print(" ROM version      : %s"%(xtndversion));
+  script.Print("");
+  script.Print(" Android version  : %s"%(androidver));
+  script.Print("");
+  script.Print(" Security patch   : %s"%(securep));
+  script.Print("");
+  script.Print(" Build date       : %s"%(buildday));
+  script.Print("");
+  script.Print(" Build type       : %s"%(buildtype));
+  script.Print("");
+  script.Print(" Device           : %s"%(device));
+  script.Print("");
+  script.Print(" Manufacturer     : %s"%(manufacturer));
+  script.Print("--------------------------------------------------");
+
   device_specific.FullOTA_InstallBegin()
 
   # All other partitions as well as the data wipe use 10% of the progress, and
@@ -247,6 +286,29 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   script.ShowProgress(0.1, 10)
   device_specific.FullOTA_InstallEnd()
+
+  script.Print("                Your Phone Is Now                 ");
+  script.Print("                   Powered By                     ");
+  script.Print("                                                  ");
+  script.Print("                                                  ");
+  script.Print("             P                   P                ");
+  script.Print("              R                 R                 ");
+  script.Print("               O               O                  ");
+  script.Print("                J             J                   ");
+  script.Print("                 E           E                    ");
+  script.Print("                  C         C                     ");
+  script.Print("                   T       T                      ");
+  script.Print("                      ROM                         ");
+  script.Print("                   X       X                      ");
+  script.Print("                  T         T                     ");
+  script.Print("                 E           E                    ");
+  script.Print("                N             N                   ");
+  script.Print("               D               D                  ");
+  script.Print("              E                 E                 ");
+  script.Print("             D                   D                ");
+  script.Print("                                                  ");
+  script.Print("                                                  ");
+  script.Print("                     ENJOY                        ");
 
   if OPTIONS.extra_script is not None:
     script.AppendExtra(OPTIONS.extra_script)
