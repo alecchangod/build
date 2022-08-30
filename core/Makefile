@@ -6221,13 +6221,14 @@ $(call declare-1p-container,$(INTERNAL_OTA_PACKAGE_TARGET),)
 $(call declare-container-license-deps,$(INTERNAL_OTA_PACKAGE_TARGET),$(BUILT_TARGET_FILES_PACKAGE) $(OTA_FROM_TARGET_FILES) $(INTERNAL_OTATOOLS_FILES),$(PRODUCT_OUT)/:/)
 
 XTENDED_PACKAGE := $(PRODUCT_OUT)/$(XTENDED_VERSION).zip
+SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 
 .PHONY: otapackage bacon xtended
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: xtended
 xtended: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(XTENDED_PACKAGE)
-	$(hide) $(MD5) $(XTENDED_PACKAGE) > $(XTENDED_PACKAGE).md5sum
+	$(hide) $(SHA256) $(XTENDED_PACKAGE) > $(XTENDED_PACKAGE).sha256sum
 	@echo -e ${CL_RED}"                                               "${CL_RED}
 	@echo -e ${CL_RED}"========-Package completed successfully-======="${CL_RED}
 	@echo -e ${CL_RED}"***********************************************"${CL_RED}
@@ -6247,7 +6248,7 @@ xtended: otapackage
 	@echo -e ${CL_RED}"                                               "${CL_RED}
 	@echo -e ${CL_CYN}"═══════════════════════════════════════════════"${CL_RST}
 	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(XTENDED_PACKAGE)${CL_RST}
-	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(XTENDED_PACKAGE).md5sum | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"SHA256: "${CL_YLW}" `cat $(XTENDED_PACKAGE).sha256sum | awk '{print $$1}' `"${CL_RST}
 	@echo -e ${CL_BLD}${CL_YLW}"Size: "${CL_YLW}" `du -sh $(XTENDED_PACKAGE) | awk '{print $$1}' `"${CL_RST}
 	@echo -e ${CL_CYN}"═══════════════════════════════════════════════"${CL_RST}
 
