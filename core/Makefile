@@ -6295,6 +6295,8 @@ bacon: xtended
 xtended: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(XTENDED_PACKAGE)
 	$(hide) $(SHA256) $(XTENDED_PACKAGE) > $(XTENDED_PACKAGE).sha256sum
+	@echo "Creating json OTA..." >&2
+	$(hide) ./vendor/xtended/build/tools/createjson.sh $(TARGET_DEVICE) $(PRODUCT_OUT) $(XTENDED_VERSION).zip
 	@echo -e ${CL_RED}"                                               "${CL_RED}
 	@echo -e ${CL_RED}"========-Package completed successfully-======="${CL_RED}
 	@echo -e ${CL_RED}"***********************************************"${CL_RED}
